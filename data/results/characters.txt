@@ -1,0 +1,15 @@
+1. King : 3477 times
+2. Prince : 2787 times
+3. Princess : 1255 times
+4. God : 921 times
+5. Queen : 714 times
+6. Cat : 218 times
+7. Father : 187 times
+8. Emperor : 182 times
+9. Tree : 137 times
+10. General : 129 times
+11. Prophet : 123 times
+12. Mother : 98 times
+13. Lady : 83 times
+14. Hunter : 76 times
+15. Fool : 74 times
