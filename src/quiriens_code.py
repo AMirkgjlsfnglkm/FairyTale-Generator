@@ -1,7 +1,7 @@
 import pandas as pd
 from collections import Counter
 
-df = pd.read_excel('./data/Veale_db/Veale_s script midpoints.xlsx', index_col=None, na_values=['NA'])
+df = pd.read_excel('../data/Veale_db/Veale_s script midpoints.xlsx', index_col=None, na_values=['NA'])
 verbs_after_mp = df['After Midpoint'].tolist()
 
 new_verbs_after_mp = []
