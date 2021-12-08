@@ -20,4 +20,6 @@ for verb in verbs_after_mp:
 
 d = Counter(d)
 common_verbs = d.most_common(100)
+for i in common_verbs:
+    print(i[0])
 print(common_verbs)
