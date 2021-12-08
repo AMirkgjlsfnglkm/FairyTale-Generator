@@ -146,7 +146,7 @@ class Story:
         # If no possible options were found
         if len(options) < 1:
             print("No trait found: taking a default one")
-            trait = "Humble"
+            trait = "humble"
         else:
             # Choose a random one of the possible trait options
             trait = work_sheet[rd.choice(options)][0].value
@@ -291,4 +291,6 @@ class Story:
         return verb
 
 
-story = Story(4)
+story = Story(32)
+
+# 32 no first character
