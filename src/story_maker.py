@@ -107,7 +107,7 @@ class Story:
 
             # Find the rows that contain the verb
             options = []
-            for row in range(1, 450):
+            for row in range(1, 162):
                 if work_sheet[row][2].value is not None:
                     if verb in work_sheet[row][2].value.split(", "):
                         options.append(row)
@@ -157,7 +157,7 @@ class Story:
     # This function creates a character B and a trait based upon the first midpoint, as an object
     def create_character_b(self):
         # Open the "Category actions" sheet
-        workbook = load_workbook(filename="../data/Veale_db/Veale's category actions.xlsx")
+        workbook = load_workbook(filename="../data/results/extracted_category_actions.xlsx")
         work_sheet = workbook.active
 
         # Retrieve the midpoint verbs from the first midpoint
@@ -174,7 +174,7 @@ class Story:
 
             # Find the rows that contain the verb
             options = []
-            for row in range(1, 450):
+            for row in range(1, 162):
                 if work_sheet[row][3].value is not None:
                     if verb in work_sheet[row][3].value.split(", "):
                         options.append(row)
@@ -291,6 +291,6 @@ class Story:
         return verb
 
 
-story = Story(6)
+story = Story(7)
 
 # 32 no first character
