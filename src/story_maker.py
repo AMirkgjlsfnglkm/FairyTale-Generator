@@ -90,7 +90,7 @@ class Story:
     # This function creates a character A and a trait based upon the first midpoint, as a subject
     def create_character_a(self):
         # Open the "Category actions" sheet
-        workbook = load_workbook(filename="../data/Veale_db/Veale's category actions.xlsx")
+        workbook = load_workbook(filename="../data/results/extracted_category_actions.xlsx")
         work_sheet = workbook.active
 
         # Retrieve the midpoint verbs from the first midpoint
@@ -291,6 +291,6 @@ class Story:
         return verb
 
 
-story = Story(32)
+story = Story(6)
 
 # 32 no first character
