@@ -19,8 +19,8 @@ class Story:
         rd.seed(seed)
 
         self.create_intro()
-        self.create_first_midpoint()
         self.create_second_midpoint()
+        self.create_first_midpoint()
         self.create_character_a()
         self.create_character_b()
         self.create_need()
@@ -33,7 +33,7 @@ class Story:
         self.intro = "Once upon a time,"
 
     # This function creates the first midpoint of the story: a truple of verbs
-    def create_first_midpoint(self):
+    def create_second_midpoint(self):
         # Open the "Script midpoints" sheet
         workbook = load_workbook(filename="../data/Veale_db/Veale_s script midpoints.xlsx")
         work_sheet = workbook.active
@@ -53,39 +53,43 @@ class Story:
         midpoint.append(rd.choice(verb3))
 
         # Store the first midpoint
-        self.first_midpoint = midpoint
+        self.second_midpoint = midpoint
 
     # This function creates the second midpoint of the story, a truple of verbs, based upon the first midpoint
-    def create_second_midpoint(self):
+    def create_first_midpoint(self):
         # Open the "Script midpoints" sheet
         workbook = load_workbook(filename="../data/Veale_db/Veale_s script midpoints.xlsx")
         work_sheet = workbook.active
 
         # Retrieve the last verb of the first midpoint
-        beginning_verb = self.first_midpoint[2]
+        ending_verb = self.second_midpoint[0]
 
         # Find all the options for rows starting with the verb
         options = []
         for row in range(2, 2761):
-            if work_sheet[row][0].value == beginning_verb:
+            if ending_verb in work_sheet[row][2].value.split(", "):
                 options.append(row)
 
-        # Choose a random one of these rows
-        row = rd.choice(options)
+        # If there is an option
+        if len(options) != 0:
+            # Choose a random one of these rows
+            row = rd.choice(options)
 
-        # Store the first verb in the row
-        midpoint = [work_sheet[row][0].value]
+            # Store the first verb in the row
+            midpoint = [work_sheet[row][0].value]
 
-        # Choose a random one of the second verbs in the row
-        verb2 = work_sheet[row][1].value.split(", ")
-        midpoint.append(rd.choice(verb2))
+            # Choose a random one of the second verbs in the row
+            verb2 = work_sheet[row][1].value.split(", ")
+            midpoint.append(rd.choice(verb2))
 
-        # Choose a random one of the third verbs in the row
-        verb3 = work_sheet[row][2].value.split(", ")
-        midpoint.append(rd.choice(verb3))
+            # Choose a random one of the third verbs in the row
+            verb3 = work_sheet[row][2].value.split(", ")
+            midpoint.append(rd.choice(verb3))
 
-        # Store the second midpoint
-        self.second_midpoint = midpoint
+            # Store the second midpoint
+            self.first_midpoint = midpoint
+        else:
+            print("No second midpoint: starting over")
 
     # This function creates a character A and a trait based upon the first midpoint, as a subject
     def create_character_a(self):
@@ -260,8 +264,8 @@ class Story:
             print(self.util_idiomatize(verb).replace("A", "the " + self.character_a[0])
                   .replace("B", "the " + self.character_b[0]))
         # Ending
-        print(self.ending.replace("A", "the " + self.character_a[0])
-                  .replace("B", "the " + self.character_b[0]))
+        print(self.ending.replace("A ", "the " + self.character_a[0])
+                  .replace("B ", "the " + self.character_b[0]))
 
     # This function returns the idiomatized version of the input verb
     @staticmethod
@@ -291,6 +295,6 @@ class Story:
         return verb
 
 
-story = Story(7)
+story = Story(5)
 
 # 32 no first character
