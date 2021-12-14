@@ -11,15 +11,19 @@ class Character:
     trait = ""
     article = ""
 
-    def __init__(self, char_type, trait, char):
-        self.create_name()
+    def __init__(self, char_type, trait, char, other_name=""):
+        self.create_name(other_name)
         self.char_type = char_type
         self.trait = trait
         self.determine_article(char)
 
-    def create_name(self):
-        name = rd.choice(names)
-        names.remove(name)
+    def create_name(self, other_name):
+        if other_name == "":
+            name = rd.choice(names)
+        else:
+            copy_of_names = names.copy()
+            copy_of_names.remove(other_name)
+            name = rd.choice(copy_of_names)
         self.name = name
 
     def determine_article(self, char):
@@ -36,6 +40,7 @@ class Character:
 
     def name_call(self):
         choice = rd.randint(0, 1)
+        choice = 0
         if choice == 0:
             to_return = "the " + self.char_type
         else:
@@ -62,6 +67,7 @@ class Story:
         self.create_intro()
         self.create_second_midpoint()
         self.create_first_midpoint()
+
         self.create_character_a()
         self.create_character_b()
         self.create_need()
@@ -80,7 +86,7 @@ class Story:
         work_sheet = workbook.active
 
         # Choose a random row in the worksheet
-        random_index = rd.randint(1, 229)
+        random_index = rd.randint(1, 121)
 
         # Store the first verb in the row
         midpoint = [work_sheet[random_index][0].value]
@@ -264,7 +270,7 @@ class Story:
             # Choose a random one of the possible trait options
             trait = work_sheet[rd.choice(options)][0].value
 
-        obj_character = Character(character, trait, "b")
+        obj_character = Character(character, trait, "b", self.character_a.name)
         self.character_b = obj_character
 
     # This function creates a need for character A based on the midpoints.
@@ -369,9 +375,4 @@ class Story:
         return verb
 
 
-story = Story(14)
-
-# Almost works: 3, 7, 8
-# Bad story: 1, 11, 12
-# Broken: 2, 6, 9, 13, 14
-# Yay?: 5, 10
+print(Story(1))

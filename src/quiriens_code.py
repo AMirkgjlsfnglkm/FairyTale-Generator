@@ -2,12 +2,15 @@ import pandas as pd
 from collections import Counter
 
 df = pd.read_excel('../data/Veale_db/Veale_s script midpoints.xlsx', index_col=None, na_values=['NA'])
+
+verbs_before_mp = df['Before Midpoint'].tolist()
 verbs_after_mp = df['After Midpoint'].tolist()
 
 new_verbs_after_mp = []
 for i in verbs_after_mp:
     for verb in i.replace(" ", "").split(","):
-        new_verbs_after_mp.append(verb)
+        if verb in verbs_before_mp:
+            new_verbs_after_mp.append(verb)
 verbs_after_mp = new_verbs_after_mp
 
 d = dict()
