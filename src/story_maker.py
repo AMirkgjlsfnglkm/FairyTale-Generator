@@ -60,11 +60,15 @@ class Story:
     character_b = None
     need = ""
     ending = ""
+    template_start = ""
+    template_intro_a = ""
+    template_intro_b = ""
+    template_need = ""
+    template_end = ""
 
     def __init__(self, seed):
         rd.seed(seed)
 
-        self.create_intro()
         self.create_second_midpoint()
         self.create_first_midpoint()
 
@@ -73,11 +77,8 @@ class Story:
         self.create_need()
         self.create_ending()
 
+        self.init_templates()
         self.return_story()
-
-    # This function creates the introduction of the story
-    def create_intro(self):
-        self.intro = "Once upon a time,"
 
     # This function creates the first midpoint of the story: a truple of verbs
     def create_second_midpoint(self):
@@ -306,7 +307,26 @@ class Story:
         # If no row was found using the verb
         if self.ending == "":
             print("No bookend found: taking standard one")
-            self.ending = "and they lived happily ever after!"
+            self.ending = self.template_end
+
+    # This function chooses templates for the story at random
+    def init_templates(self):
+        workbook = load_workbook(filename='../data/Own_db/Templates.xlsx')
+        worksheet = workbook.active
+
+        # Make lists with all the possible template sentences for each topic/sentence required
+        start_sentence = [worksheet[i][0].value for i in range(2, 9)]
+        intro_character_a = [worksheet[i][1].value for i in range(2, 5)]
+        intro_character_b = [worksheet[i][2].value for i in range(2, 9)]
+        need = [worksheet[i][3] for i in range(2, 9)]
+        ending = [worksheet[i][4] for i in range(2, 9)]
+
+        # Randomly select template sentences
+        self.template_start = rd.choice(start_sentence)
+        self.template_intro_a = rd.choice(intro_character_a)
+        self.template_intro_b = rd.choice(intro_character_b)
+        self.template_need = rd.choice(need)
+        self.template_end = rd.choice(ending)
 
     # This function prints the story in a readable format.
     def return_story(self):
@@ -314,11 +334,11 @@ class Story:
         character_b = self.character_b
 
         # Start sentence
-        print(self.intro, "there was", character_a.article, character_a.trait, character_a.char_type,
+        print(self.template_start, self.template_intro_a, character_a.article, character_a.trait, character_a.char_type,
               "called", character_a.name)
 
         # Introduction of character B
-        print("They knew", character_b.article, character_b.char_type, "that was", character_b.trait,
+        print(self.template_intro_b, character_b.article, character_b.char_type, "that was", character_b.trait,
               "called", character_b.name)
 
         # Introduction of need
