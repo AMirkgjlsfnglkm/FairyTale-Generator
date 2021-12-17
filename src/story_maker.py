@@ -281,11 +281,15 @@ class Story:
         work_sheet = workbook.active
 
         verb = self.second_midpoint[2]
-
         need = ""
         for row in range(2, 8):
             if work_sheet[row][0].value == verb:
                 need = rd.choice(work_sheet[row][1].value.split(", "))
+                if 'C' in need:
+                    need = need.replace("C", self.template_need)
+                else:
+                    need = 'A ' + need
+
         if need == "":
             print("No need found: taking standard one")
             need = "A wanted to change their boring ways."
@@ -343,7 +347,7 @@ class Story:
               "called", character_b.name)
 
         # Introduction of need
-        need_intro = (character_a.name_call() + " " + self.need.replace("A", character_a.name_call())
+        need_intro = (self.need.replace("A", character_a.name_call())
                       .replace("B", character_b.name_call()))
         need_intro = need_intro[0].capitalize() + need_intro[1:]
         print(need_intro)
@@ -396,4 +400,4 @@ class Story:
         return verb
 
 
-Story(4)
+Story(9)
