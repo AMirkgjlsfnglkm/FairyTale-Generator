@@ -63,11 +63,13 @@ class Story:
     template_start = ""
     template_intro_a = ""
     template_intro_b = ""
-    template_need = ""
+    template_need = ""          # not used yet
     template_end = ""
 
     def __init__(self, seed):
         rd.seed(seed)
+
+        self.init_templates()
 
         self.create_second_midpoint()
         self.create_first_midpoint()
@@ -77,7 +79,6 @@ class Story:
         self.create_need()
         self.create_ending()
 
-        self.init_templates()
         self.return_story()
 
     # This function creates the first midpoint of the story: a truple of verbs
@@ -112,7 +113,7 @@ class Story:
         # Retrieve the last verb of the first midpoint
         ending_verb = self.second_midpoint[0]
 
-        # Find all the options for rows starting with the verb
+        # Find all the options for rows ending with the verb
         options = []
         for row in range(2, 2761):
             if ending_verb in work_sheet[row][2].value.split(", "):
@@ -315,11 +316,11 @@ class Story:
         worksheet = workbook.active
 
         # Make lists with all the possible template sentences for each topic/sentence required
-        start_sentence = [worksheet[i][0].value for i in range(2, 9)]
-        intro_character_a = [worksheet[i][1].value for i in range(2, 5)]
-        intro_character_b = [worksheet[i][2].value for i in range(2, 9)]
-        need = [worksheet[i][3] for i in range(2, 9)]
-        ending = [worksheet[i][4] for i in range(2, 9)]
+        start_sentence = [worksheet[i][0].value for i in range(2, 8)]
+        intro_character_a = [worksheet[i][1].value for i in range(2, 4)]
+        intro_character_b = [worksheet[i][2].value for i in range(2, 8)]
+        need = [worksheet[i][3].value for i in range(2, 8)]
+        ending = [worksheet[i][4].value for i in range(2, 6)]
 
         # Randomly select template sentences
         self.template_start = rd.choice(start_sentence)
@@ -395,4 +396,4 @@ class Story:
         return verb
 
 
-print(Story(1))
+print(Story(2))
