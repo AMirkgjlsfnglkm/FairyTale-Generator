@@ -104,7 +104,7 @@ class Story:
         # Store the second midpoint
         self.second_midpoint = midpoint
 
-    # This function creates the second midpoint of the story, a truple of verbs, based upon the first midpoint
+    # This function creates the first midpoint of the story, a truple of verbs, based upon the second midpoint
     def create_first_midpoint(self):
         # Open the "Script midpoints" sheet
         workbook = load_workbook(filename="../data/Veale_db/Veale_s script midpoints.xlsx")
@@ -119,25 +119,35 @@ class Story:
             if ending_verb in work_sheet[row][2].value.split(", "):
                 options.append(row)
 
-        # If there is an option
-        if len(options) != 0:
+        # If there are options, find first midpoint
+        midpoint_found = False
+        while len(options) != 0 and not midpoint_found:
             # Choose a random one of these rows
             row = rd.choice(options)
 
-            # Store the first verb in the row
-            midpoint = [work_sheet[row][0].value]
+            # Store the first verb in the row if it's not a duplicate of the second midpoint
+            verb1 = work_sheet[row][0].value.split(", ")
+            verb1 = [verb for verb in verb1 if verb not in self.second_midpoint]
+            if len(verb1) == 0:
+                continue
+            midpoint = [rd.choice(verb1)]
 
-            # Choose a random one of the second verbs in the row
+            # Choose a random one of the second verbs in the row if it's not a duplicate of the second midpoint
             verb2 = work_sheet[row][1].value.split(", ")
+            verb2 = [verb for verb in verb2 if verb not in self.second_midpoint]
+            if len(verb2) == 0:
+                continue
             midpoint.append(rd.choice(verb2))
 
-            # Choose a random one of the third verbs in the row
-            verb3 = work_sheet[row][2].value.split(", ")
-            midpoint.append(rd.choice(verb3))
+            # Choose the first verb in the second midpoint as third verb
+            verb3 = self.second_midpoint[0]
+            midpoint.append(verb3)
 
-            # Store the second midpoint
+            # If this point is reached, all midpoint verbs have been selected that are not duplicates
+            midpoint_found = True
             self.first_midpoint = midpoint
-        else:
+
+        if not midpoint_found:
             print("No first midpoint: starting over")
 
     # This function creates a character A and a trait based upon the first midpoint, as a subject
@@ -400,4 +410,4 @@ class Story:
         return verb
 
 
-Story(9)
+Story(2)
