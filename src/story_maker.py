@@ -386,7 +386,6 @@ class Story:
 
         # Second midpoint idiomatized
         for verb in self.second_midpoint[1:]:
-            print(verb)
             verb_sentence = self.util_idiomatize(verb)
             if "A" in verb_sentence and "B" in verb_sentence:
                 a_object = verb_sentence.index("A") < verb_sentence.index("B")
