@@ -300,7 +300,7 @@ class Story:
 
         if need == "":
             print("No need found: taking standard one")
-            need = "A wanted to change their boring ways."
+            need = "A wanted to change their boring ways"
         self.need = need
 
     # This function generates an ending based on the second midpoint
@@ -348,26 +348,26 @@ class Story:
 
         # Start sentence
         print(self.template_start, self.template_intro_a, character_a.article, character_a.trait, character_a.char_type,
-              "called", character_a.name)
+              "called", character_a.name + ".")
 
         if "A" in self.need and "B" in self.need:
             # Introduction of character B
-            print(self.template_intro_b, character_b.article, character_b.char_type, "that was", character_b.trait,
-                  "called", character_b.name)
+            print(self.template_intro_b, character_b.article, character_b.char_type,
+                  "that was", character_b.trait + ".")
             # Introduction of need
             need_intro = (self.need.replace("A", character_a.name_call())
                           .replace("B", character_b.name_call()))
             need_intro = need_intro[0].capitalize() + need_intro[1:]
-            print(need_intro)
+            print(need_intro + ".")
         else:
             # Introduction of need
             need_intro = (self.need.replace("A", character_a.name_call())
                           .replace("B", character_b.name_call()))
             need_intro = need_intro[0].capitalize() + need_intro[1:]
-            print(need_intro)
+            print(need_intro + ".")
             # Introduction of character B
-            print(self.template_intro_b, character_b.article, character_b.char_type, "that was", character_b.trait,
-                  "called", character_b.name)
+            print(self.template_intro_b, character_b.article, character_b.char_type,
+                  "that was", character_b.trait + ".")
 
         # First midpoint idiomatized
         for verb in self.first_midpoint:
@@ -403,7 +403,7 @@ class Story:
         ending_sentence = self.ending.replace("A", character_a.name_call())\
             .replace("B", character_b.name_call())
         ending_sentence = ending_sentence[0].capitalize() + ending_sentence[1:]
-        print(ending_sentence)
+        print(ending_sentence + ".")
 
     # This function returns the idiomatized version of the input verb
     @staticmethod
@@ -427,10 +427,10 @@ class Story:
             # Find the row with the verb and return a random idiomatized version from it
             for row in range(2, 820):
                 if work_sheet[row][0].value == verb:
-                    return rd.choice(work_sheet[row][4].value.split(", "))
+                    return rd.choice(work_sheet[row][4].value.split(", ")) + "."
 
         # If none are found
-        return verb
+        return verb + "."
 
 
-Story(3)
+Story(420)
