@@ -38,14 +38,12 @@ class Character:
                 article = "an"
             self.article = article
 
-    def name_call(self):
-        choice = rd.randint(0, 1)
-        choice = 0
-        if choice == 0:
-            to_return = "the " + self.char_type
-        else:
-            to_return = self.name
-        return to_return
+    def name_call(self, is_object=True, choice=False):
+        if choice and is_object:
+            return "they"
+        elif choice and not is_object:
+            return "them"
+        return "the " + self.char_type
 
 
 # The story class holds all function needed to create a story,
@@ -352,29 +350,54 @@ class Story:
         print(self.template_start, self.template_intro_a, character_a.article, character_a.trait, character_a.char_type,
               "called", character_a.name)
 
-        # Introduction of character B
-        print(self.template_intro_b, character_b.article, character_b.char_type, "that was", character_b.trait,
-              "called", character_b.name)
-
-        # Introduction of need
-        need_intro = (self.need.replace("A", character_a.name_call())
-                      .replace("B", character_b.name_call()))
-        need_intro = need_intro[0].capitalize() + need_intro[1:]
-        print(need_intro)
+        if "A" in self.need and "B" in self.need:
+            # Introduction of character B
+            print(self.template_intro_b, character_b.article, character_b.char_type, "that was", character_b.trait,
+                  "called", character_b.name)
+            # Introduction of need
+            need_intro = (self.need.replace("A", character_a.name_call())
+                          .replace("B", character_b.name_call()))
+            need_intro = need_intro[0].capitalize() + need_intro[1:]
+            print(need_intro)
+        else:
+            # Introduction of need
+            need_intro = (self.need.replace("A", character_a.name_call())
+                          .replace("B", character_b.name_call()))
+            need_intro = need_intro[0].capitalize() + need_intro[1:]
+            print(need_intro)
+            # Introduction of character B
+            print(self.template_intro_b, character_b.article, character_b.char_type, "that was", character_b.trait,
+                  "called", character_b.name)
 
         # First midpoint idiomatized
         for verb in self.first_midpoint:
-            verb_sentence = self.util_idiomatize(verb).replace("A", character_a.name_call())\
-                .replace("B", character_b.name_call())
-            verb_sentence = verb_sentence[0].capitalize() + verb_sentence[1:]
-            print(verb_sentence)
+            verb_sentence = self.util_idiomatize(verb)
+            if "A" in verb_sentence and "B" in verb_sentence:
+                a_object = verb_sentence.index("A") < verb_sentence.index("B")
+                b_object = not a_object
+            else:
+                a_object = "A" in verb_sentence
+                b_object = not a_object
+            choice = rd.choice([(False, False), (True, False), (False, True)])
+            verb_replaced = verb_sentence.replace("A", character_a.name_call(a_object, choice[0]))\
+                .replace("B", character_b.name_call(b_object, choice[1]))
+            verb_replaced = verb_replaced[0].capitalize() + verb_replaced[1:]
+            print(verb_replaced)
 
         # Second midpoint idiomatized
         for verb in self.second_midpoint[1:]:
-            verb_sentence = self.util_idiomatize(verb).replace("A", character_a.name_call())\
-                .replace("B", character_b.name_call())
-            verb_sentence = verb_sentence[0].capitalize() + verb_sentence[1:]
-            print(verb_sentence)
+            verb_sentence = self.util_idiomatize(verb)
+            if "A" in verb_sentence and "B" in verb_sentence:
+                a_object = verb_sentence.index("A") < verb_sentence.index("B")
+                b_object = not a_object
+            else:
+                a_object = "A" in verb_sentence
+                b_object = not a_object
+            choice = rd.choice([(False, False), (True, False), (False, True)])
+            verb_replaced = verb_sentence.replace("A", character_a.name_call(a_object, choice[0]))\
+                .replace("B", character_b.name_call(b_object, choice[1]))
+            verb_replaced = verb_replaced[0].capitalize() + verb_replaced[1:]
+            print(verb_replaced)
 
         # Ending
         ending_sentence = self.ending.replace("A", character_a.name_call())\
@@ -410,4 +433,4 @@ class Story:
         return verb
 
 
-Story(2)
+Story(3)
