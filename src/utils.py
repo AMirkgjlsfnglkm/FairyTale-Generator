@@ -3,7 +3,8 @@ from openpyxl import load_workbook
 workbook = load_workbook(filename="../data/Veale_db/Veale_s script midpoints.xlsx")
 work_sheet = workbook.active
 
-possible_verbs = ['are_disrespected_by', 'are_deceived_by', 'kill', 'manipulate', 'fall_in_love_with', 'profit_from']
+possible_verbs = ['kill', 'steal_from', 'fall_in_love_with', 'turn_against', 'testify_against', 'are_feared_by',
+                  'are_moved_by', 'are_respected_by', 'show_loyalty_to', 'sleep_with']
 
 ending_verbs = []
 for row in range(2, 2761):

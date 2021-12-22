@@ -82,11 +82,11 @@ class Story:
     # This function creates the first midpoint of the story: a truple of verbs
     def create_second_midpoint(self):
         # Open the "pruned script midpoints" sheet
-        workbook = load_workbook(filename="../data/Own_db/Our midpoints pruned.xlsx")
+        workbook = load_workbook(filename="../data/Own_db/Our midpoints pruned 2.xlsx")
         work_sheet = workbook.active
 
         # Choose a random row in the worksheet
-        random_index = rd.randint(1, 121)
+        random_index = rd.randint(1, 124)
 
         # Store the first verb in the row
         midpoint = [work_sheet[random_index][0].value]
