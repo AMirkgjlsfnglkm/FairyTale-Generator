@@ -422,7 +422,7 @@ class Story:
                     return rd.choice(work_sheet[row][4].value.split(", "))\
                         .replace("A", "C")\
                         .replace("B", "A")\
-                        .replace("C", "B")
+                        .replace("C", "B") + "."
         else:
             # Find the row with the verb and return a random idiomatized version from it
             for row in range(2, 820):
@@ -433,4 +433,7 @@ class Story:
         return verb + "."
 
 
-Story(100)
+for i in range(102, 120):
+    print(i)
+    Story(i)
+    print('\n', '\n')
