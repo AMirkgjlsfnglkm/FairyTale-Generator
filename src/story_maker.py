@@ -290,7 +290,7 @@ class Story:
 
         verb = self.second_midpoint[2]
         need = ""
-        for row in range(2, 8):
+        for row in range(2, 12):
             if work_sheet[row][0].value == verb:
                 need = rd.choice(work_sheet[row][1].value.split(", "))
                 if 'C' in need:
@@ -386,6 +386,7 @@ class Story:
 
         # Second midpoint idiomatized
         for verb in self.second_midpoint[1:]:
+            print(verb)
             verb_sentence = self.util_idiomatize(verb)
             if "A" in verb_sentence and "B" in verb_sentence:
                 a_object = verb_sentence.index("A") < verb_sentence.index("B")
@@ -433,4 +434,4 @@ class Story:
         return verb + "."
 
 
-Story(420)
+Story(100)
