@@ -433,7 +433,8 @@ class Story:
         return verb + "."
 
 
-for i in range(102, 120):
-    print(i)
-    Story(i)
-    print('\n', '\n')
+# for i in range(102, 120):
+#     print(i)
+#     Story(i)
+#     print('\n', '\n')
+Story(14)
