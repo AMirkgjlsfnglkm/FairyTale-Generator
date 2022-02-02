@@ -13,3 +13,6 @@ This repo contains the following
 ## Install
 To use the scripts, the following packages need to be installed:
 * openpyxl
+
+## References
+This project uses datasets from https://github.com/prosecconetwork/Scealextric
