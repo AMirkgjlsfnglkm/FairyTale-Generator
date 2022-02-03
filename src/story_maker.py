@@ -151,7 +151,7 @@ class Story:
     # This function creates a character A and a trait based upon the first midpoint, as a subject
     def create_character_a(self):
         # Open the "Category actions" sheet
-        workbook = load_workbook(filename="../data/results/humanlike_extracted_category_actions.xlsx")
+        workbook = load_workbook(filename="../data/Own_db/humanlike_extracted_category_actions.xlsx")
         work_sheet = workbook.active
 
         # Retrieve the midpoint verbs from the first midpoint
@@ -219,7 +219,7 @@ class Story:
     # This function creates a character B and a trait based upon the first midpoint, as an object
     def create_character_b(self):
         # Open the "Category actions" sheet
-        workbook = load_workbook(filename="../data/results/humanlike_extracted_category_actions.xlsx")
+        workbook = load_workbook(filename="../data/Own_db/humanlike_extracted_category_actions.xlsx")
         work_sheet = workbook.active
 
         # Retrieve the midpoint verbs from the first midpoint
@@ -437,4 +437,6 @@ class Story:
 #     print(i)
 #     Story(i)
 #     print('\n', '\n')
-Story(14)
+new_seed = rd.randint(0, 1000000)
+print('A story will be generated with seed:', new_seed)
+Story(new_seed)

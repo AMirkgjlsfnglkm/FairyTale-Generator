@@ -27,7 +27,7 @@ def find_fairy_tale_characters(fairy_tales, characters):
     counted_characters = sorted(counted_characters, key=lambda x: x[1], reverse=True)
 
     # Write all left over characters to file
-    f = open("../data/results/characters.txt", "w")
+    f = open("../data/Own_db/characters.txt", "w")
     for i in range(0, len(counted_characters)):
         f.write(str(i + 1) + '. ' + counted_characters[i][0] + ' : ' + str(counted_characters[i][1]) + ' times\n')
     f.close()
@@ -58,7 +58,7 @@ def extract_to_xlsx(character_names, file_name, work_sheet):
         new_ws.cell(row=new_index, column=3, value=work_sheet[old_index][2].value)
         new_ws.cell(row=new_index, column=4, value=work_sheet[old_index][3].value)
 
-    new_wb.save(filename='../data/results/' + file_name)
+    new_wb.save(filename='../data/Own_db/' + file_name)
 
 
 def get_fairytale_characters(work_sheet, characters):
@@ -69,7 +69,7 @@ def get_fairytale_characters(work_sheet, characters):
 
 
 def get_humanlike_characters(work_sheet):
-    with open('../data/results/humanlike_characters.txt') as f:
+    with open('../data/Own_db/humanlike_characters.txt') as f:
         characters = f.readlines()
         characters = [item.strip() for item in characters]
         extract_to_xlsx(characters, 'humanlike_extracted_category_actions.xlsx', work_sheet)
